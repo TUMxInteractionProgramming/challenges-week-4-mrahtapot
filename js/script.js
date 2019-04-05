@@ -1,23 +1,42 @@
 /* #6 start the #external #action and say hello */
 console.log("App is alive");
 
+var currentLocation = {
+    longitude: '27.2038° N',
+    latitude: '77.5013° E',
+    what3words: 'eintritt.trägheit.wertvoll'
+};
+
+/*
+var currentChannel = {
+   '#channels li .selected'
+};
+*/
+
+
+console.log(currentLocation);
+
 /**
  * #6 #Switcher function for the #channels name in the right app bar
  * @param channel Text which is set
  */
 function switchChannel(channel) {
     //Log the channel switch
+    //console.log(currentChannel);
+
     console.log("Tuning in to channel", channel);
 
     //Write the new channel to the right app bar
     document.getElementById('channel-name').innerHTML = channel.name;
 
     //#6 change the #channel #location
-    document.getElementById('channel-location').innerHTML = 'by <a href="http://w3w.co/channel.createdBy" target="_blank"><strong>channel.createdBy</strong></a>';
+    document.getElementById('channel-location').innerHTML = 'by <a href="http://w3w.co/'+channel.createdBy+'" target="_blank"><strong>' + channel.createdBy +'</strong></a>';
 
+    
     /* #6 #liking channels on #click */
-    $('#channel-star').attr('class', 'far fa-star');
+    //$('#channel-star').attr('class', 'fas fa-star');
 
+    /* Show the star depending on its boolean value*/
     (channel.starred) ? ($('#channel-star').attr('class', 'fas fa-star')) : ($('#channel-star').attr('class', 'far fa-star'));
 
     /* #6 #highlight the selected #channel.
@@ -27,8 +46,8 @@ function switchChannel(channel) {
 }
 
 /* #6 #liking a channel on #click */
-function star() {
-    $('#channel-star').attr('class', 'fas fa-star');
+function star(channel) {
+    (channel.starred) ? ($('#channel-star').attr('class', 'far fa-star'), channel.starred=false) : ($('#channel-star').attr('class', 'fas fa-star'), channel.starred=true);
 }
 
 /**
